@@ -5,10 +5,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Button } from "react-bootstrap";
 import { getImage } from "@/assets";
+import { useWallet } from "@/hooks/useWallet";
 
 import "./navbar.css";
 
 export const NavBar: FC = () => {
+  const { formattedAddress, address, balance, connect, disconnect, isConnecting, error } = useWallet();
+  const isConnected = Boolean(address);
+  const buttonLabel = formattedAddress || (isConnecting ? "Connecting..." : "Connect Wallet");
+  const balanceLabel = `${balance || "0.0000"} ETH`;
+
   return (
     <Navbar expand="lg" className="py-3">
       <Container>
@@ -17,7 +23,7 @@ export const NavBar: FC = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav className="my-lg-0 my-2 me-auto" navbarScroll>
+          <Nav className="my-lg-0 my-2 me-auto w-100  align-items-lg-center gap-3 gap-lg-0" navbarScroll>
             <Nav.Link href="#action1">Marketplace</Nav.Link>
             <Nav.Link href="#action2" className="px-lg-3">
               About Us
@@ -28,9 +34,20 @@ export const NavBar: FC = () => {
         <div className="d-flex align-items-center order">
           <span className="line d-lg-inline-block d-none"></span>
           <i className="fa-regular fa-heart"></i>
-          <Button variant="primary" className="btn-primary d-none d-lg-inline-block">
-            Connect Wallet
-          </Button>
+          <div className="wallet-panel">
+            <Button variant="primary" className="btn-primary d-none d-lg-inline-block" onClick={connect} disabled={isConnecting}>
+              {buttonLabel}
+            </Button>
+            {isConnected && (
+              <>
+                <Button variant="outline-light" className="wallet-disconnect-button d-none d-lg-inline-block" onClick={disconnect}>
+                  Disconnect
+                </Button>
+                <span className="wallet-balance">{balanceLabel}</span>
+              </>
+            )}
+            <span className="wallet-error text-danger">{error || "\u00a0"}</span>
+          </div>
         </div>
       </Container>
     </Navbar>
