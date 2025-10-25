@@ -20,7 +20,7 @@ export const MotionIn: FC<MotionInProps> = ({ from = "fade", duration = 0.8, cla
   }[from];
 
   return (
-    <motion.div {...map} transition={{ duration, ease: "easeOut" }} className={className} {...rest}>
+    <motion.div {...map} viewport={{ once: true, amount: 0.2 }} transition={{ duration, ease: "easeOut" }} className={className} {...rest}>
       {children}
     </motion.div>
   );
