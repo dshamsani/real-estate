@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface CountDownProps {
   h: number;
@@ -7,32 +7,58 @@ interface CountDownProps {
   s: number;
 }
 
+interface TimeState {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 export const CountDown: FC<CountDownProps> = ({ h, m, s }) => {
-  const [hours, setHour] = useState(h);
-  const [minutes, setMinutes] = useState(m);
-  const [seconds, setSeconds] = useState(s);
+  const [time, setTime] = useState<TimeState>({
+    hours: h,
+    minutes: m,
+    seconds: s,
+  });
 
-  const timer = setTimeout(() => {
-    setSeconds(seconds - 1);
-    if (seconds === 0) {
-      setMinutes(minutes - 1);
-      setSeconds(59);
+  useEffect(() => {
+    if (time.hours === 0 && time.minutes === 0 && time.seconds === 0) {
+      return;
     }
-    if (minutes === 0 && seconds === 0) {
-      setHour(hours - 1);
-      setMinutes(59);
-    }
-  }, 1000);
 
-  if (hours === 0 && minutes === 0 && seconds === 0) {
-    clearTimeout(timer);
-  }
+    const timer = setInterval(() => {
+      setTime((prev) => {
+        let { hours, minutes, seconds } = prev;
+
+        seconds--;
+
+        if (seconds < 0) {
+          seconds = 59;
+          minutes--;
+
+          if (minutes < 0) {
+            minutes = 59;
+            hours--;
+
+            if (hours < 0) {
+              hours = 0;
+              minutes = 0;
+              seconds = 0;
+            }
+          }
+        }
+
+        return { hours, minutes, seconds };
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [time]);
 
   return (
     <h6 className='text-white'>
-      {hours < 10 ? "0" + hours : hours}h :{" "}
-      {minutes < 10 ? "0" + minutes : minutes}m :{" "}
-      {seconds < 10 ? "0" + seconds : seconds}s
+      {time.hours < 10 ? "0" + time.hours : time.hours}h :{" "}
+      {time.minutes < 10 ? "0" + time.minutes : time.minutes}m :{" "}
+      {time.seconds < 10 ? "0" + time.seconds : time.seconds}s
     </h6>
   );
 };
