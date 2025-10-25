@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import type { FC } from "react";
+import { type FC, useMemo } from "react";
 
 interface AnimationTitlesProps {
   title: string;
@@ -10,6 +10,8 @@ export const AnimationTitles: FC<AnimationTitlesProps> = ({
   title,
   className,
 }) => {
+  const characters = useMemo(() => title.split(""), [title]);
+
   const hVariants = {
     hidden: {
       opacity: 0,
@@ -38,7 +40,7 @@ export const AnimationTitles: FC<AnimationTitlesProps> = ({
       whileInView='visible'
       className={className}
     >
-      {title.split("").map((char, index) => (
+      {characters.map((char, index) => (
         <motion.span variants={spanVariants} key={index}>
           {char}
         </motion.span>
