@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { Button, Container } from "react-bootstrap";
 import { motion } from "framer-motion";
-import { AnimationTitles } from "../components/functions/AnimationTitles";
+import { AnimationTitles } from "../components/AnimationTitles";
 import { getImage } from "@/assets";
 
 export const AboutUs: FC = () => {

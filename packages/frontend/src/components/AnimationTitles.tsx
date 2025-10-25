@@ -41,7 +41,7 @@ export const AnimationTitles: FC<AnimationTitlesProps> = ({
       className={className}
     >
       {characters.map((char, index) => (
-        <motion.span variants={spanVariants} key={index}>
+        <motion.span variants={spanVariants} key={`${char}_${index}`}>
           {char}
         </motion.span>
       ))}

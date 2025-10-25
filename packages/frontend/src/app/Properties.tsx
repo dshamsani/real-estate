@@ -1,9 +1,9 @@
 import { Button, Card, Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
-import { CountDown } from "../components/functions/CountDown";
+import { CountDown } from "../components/CountDown";
 import { motion } from "framer-motion";
-import { AnimationTitles } from "../components/functions/AnimationTitles";
+import { AnimationTitles } from "../components/AnimationTitles";
 import type { FC } from "react";
 import { useState } from "react";
 

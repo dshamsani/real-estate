@@ -1,5 +1,5 @@
 import { Button, Container } from "react-bootstrap";
-import { AnimationTitles } from "../components/functions/AnimationTitles";
+import { AnimationTitles } from "../components/AnimationTitles";
 import type { FC } from "react";
 
 export const Subscribe: FC = () => {

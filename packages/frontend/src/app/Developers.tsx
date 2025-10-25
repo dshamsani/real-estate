@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { AnimationTitles } from "../components/functions/AnimationTitles";
+import { AnimationTitles } from "../components/AnimationTitles";
 import { motion } from "framer-motion";
 import type { FC } from "react";
 import { getImage } from "@/assets";
