@@ -12,15 +12,16 @@
     "lint:fix": "eslint . --ext ts,tsx --fix"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.133.27",
     "bootstrap": "^5.3.2",
     "framer-motion": "^12.23.24",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.16.0",
     "swiper": "^10.3.1"
   },
   "devDependencies": {
+    "@tanstack/router-plugin": "^1.133.27",
     "@types/node": "^24.9.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
