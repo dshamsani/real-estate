@@ -1,333 +1,70 @@
-import { Button, Card, Container } from "react-bootstrap";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules";
-import { CountDown } from "../components/CountDown";
-import { motion } from "framer-motion";
-import { AnimationTitles } from "../components/AnimationTitles";
 import type { FC } from "react";
 import { useState } from "react";
+import { Button, Container } from "react-bootstrap";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, A11y } from "swiper/modules";
+import "swiper/css";
 
-import { getImage } from "@/assets";
+import { AnimationTitles } from "../components/AnimationTitles";
+import { MotionIn } from "../components/MotionIn";
+import { PropertyAuctionCard } from "../components/PropertyAuctionCard";
+import { useToggleSet } from "../hooks/useToggleSet";
+import { CARD_BREAKPOINTS, PROPERTIES_CARDS, TAB_BREAKPOINTS, TABS } from "@/constants/properties";
 
-type PropertyTab = "All" | "Cottage" | "Chalet" | "Manor" | "Penthouse" | "Farmhouse" | "Duplex";
+export type PropertyTab = "All" | "Cottage" | "Chalet" | "Manor" | "Penthouse" | "Farmhouse" | "Duplex";
 
 export const Properties: FC = () => {
-  const [activeTab, setActiveTab] = useState<PropertyTab>("Cottage");
-  const [likedProperties, setLikedProperties] = useState<Set<number>>(new Set([2]));
+  const [activeTab, setActiveTab] = useState<PropertyTab>("All");
+  const { has: isLiked, toggle: toggleLike } = useToggleSet<number>([2]);
 
-  const handleTabClick = (tab: PropertyTab) => {
-    setActiveTab(tab);
-  };
-
-  const toggleLike = (propertyId: number) => {
-    setLikedProperties((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(propertyId)) {
-        newSet.delete(propertyId);
-      } else {
-        newSet.add(propertyId);
-      }
-      return newSet;
-    });
-  };
+  const visibleCards = activeTab === "All" ? PROPERTIES_CARDS : PROPERTIES_CARDS.filter((c) => c.category === activeTab);
 
   return (
-    <div className='properties'>
+    <div className="properties">
       <Container>
-        <AnimationTitles
-          className='title mx-auto'
-          title='Discover more properties'
-        />
-        {/* Start tabs */}
-        <div className='tabs d-flex justify-content-start justify-content-sm-center align-items-center w-lg-50 flex-nowrap'>
-          <Swiper
-            className='mySwiper overflow-none'
-            grabCursor={true}
-            spaceBetween={15}
-            slidesPerView={6}
-            breakpoints={{
-              0: {
-                slidesPerView: 3,
-              },
-              768: {
-                slidesPerView: 6,
-              },
-            }}
-          >
-            <SwiperSlide>
-              <Button
-                className={`bg-black-100 ms-0 border-0 ${activeTab === "All" ? "active" : ""}`}
-                onClick={() => handleTabClick("All")}
-              >
-                All
-              </Button>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Button
-                className={`bg-black-100 ms-0 border-0 ${activeTab === "Cottage" ? "active" : ""}`}
-                onClick={() => handleTabClick("Cottage")}
-              >
-                Cottage
-              </Button>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Button
-                className={`bg-black-100 ms-0 border-0 ${activeTab === "Chalet" ? "active" : ""}`}
-                onClick={() => handleTabClick("Chalet")}
-              >
-                Chalet
-              </Button>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Button
-                className={`bg-black-100 ms-0 border-0 ${activeTab === "Manor" ? "active" : ""}`}
-                onClick={() => handleTabClick("Manor")}
-              >
-                Manor
-              </Button>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Button
-                className={`bg-black-100 ms-0 border-0 ${activeTab === "Penthouse" ? "active" : ""}`}
-                onClick={() => handleTabClick("Penthouse")}
-              >
-                Penthouse
-              </Button>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Button
-                className={`bg-black-100 ms-0 border-0 ${activeTab === "Farmhouse" ? "active" : ""}`}
-                onClick={() => handleTabClick("Farmhouse")}
-              >
-                Farmhouse
-              </Button>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Button
-                className={`bg-black-100 ms-0 border-0 ${activeTab === "Duplex" ? "active" : ""}`}
-                onClick={() => handleTabClick("Duplex")}
-              >
-                Duplex
-              </Button>
-            </SwiperSlide>
+        <AnimationTitles className="title mx-auto" title="Discover more properties" />
+
+        <div className="tabs d-flex justify-content-start justify-content-sm-center align-items-center w-lg-50 flex-nowrap">
+          <Swiper className="mySwiper overflow-none" grabCursor spaceBetween={15} breakpoints={TAB_BREAKPOINTS}>
+            {TABS.map((tab) => (
+              <SwiperSlide key={tab}>
+                <Button className={`bg-black-100 ms-0 border-0 ${activeTab === tab ? "active" : ""}`} onClick={() => setActiveTab(tab)}>
+                  {tab}
+                </Button>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
-        {/* End tabs */}
-        {/* Start cards */}
-        <motion.div
-          initial={{ x: -80 }}
-          whileInView={{ x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+
+        <MotionIn from="left">
           <Swiper
-            slidesPerView={4}
+            modules={[Pagination, Navigation, A11y]}
+            className="mySwiper mt-4"
+            grabCursor
+            loop
             spaceBetween={15}
-            grabCursor={true}
-            loop={true}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
-              520: {
-                slidesPerView: 2,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              992: {
-                slidesPerView: 4,
-              },
-              1198: {
-                slidesPerView: 5,
-              },
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-            className='mySwiper mt-4'
+            pagination={{ clickable: true, dynamicBullets: true }}
+            navigation
+            breakpoints={CARD_BREAKPOINTS}
+            a11y={{ enabled: true }}
+            aria-label="Property listings carousel"
           >
-            <SwiperSlide>
-              <Card className='bg-black-100 rounded'>
-                <Card.Body className='p-2'>
-                  <div className='position-relative overflow-hidden rounded'>
-                    <Card.Img
-                      variant='top'
-                      alt='Cottage Forrest 1'
-                      src={getImage('properties/picture-of-a-wooden-building-in-the-forest.webp')}
-                    />
-                    <i
-                      className={`fa-heart like ${likedProperties.has(1) ? "fa-solid text-danger" : "fa-regular"}`}
-                      onClick={() => toggleLike(1)}
-                    ></i>
-                  </div>
-                  <h5 className='fw-normal mt-2 text-white'>
-                    Cottage «Forrest 1»
-                  </h5>
-                  <p className='gray-90'>@Red Oak Realty</p>
-                  <div className='d-flex'>
-                    <div className='me-3'>
-                      <CountDown h={9} m={45} s={8} />
-                      <span className='gray-90'>Remaining Time</span>
-                    </div>
-                    <div>
-                      <h6 className='text-white'>29.71 ETH</h6>
-                      <span className='gray-90'>Current Bid</span>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card className='bg-black-100 rounded'>
-                <Card.Body className='p-2'>
-                  <div className='position-relative overflow-hidden rounded'>
-                    <Card.Img
-                      variant='top'
-                      alt='Freshness'
-                      src={getImage('properties/pexels-stan-krotov-12737424 1.webp')}
-                    />
-                    <i
-                      className={`fa-heart like ${likedProperties.has(2) ? "fa-solid text-danger" : "fa-regular"}`}
-                      onClick={() => toggleLike(2)}
-                    ></i>
-                  </div>
-                  <h5 className='fw-normal mt-2 text-white'>Freshness</h5>
-                  <p className='gray-90'>@ERA Ukraine Real Estate</p>
-                  <div className='d-flex'>
-                    <div className='me-3'>
-                      <CountDown h={29} m={15} s={10} />
-                      <span className='gray-90'>Remaining Time</span>
-                    </div>
-                    <div>
-                      <h6 className='text-white'>14.81 ETH</h6>
-                      <span className='gray-90'>Current Bid</span>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card className='bg-black-100 rounded'>
-                <Card.Body className='p-2'>
-                  <div className='position-relative overflow-hidden rounded'>
-                    <Card.Img
-                      variant='top'
-                      alt='Wish house'
-                      src={getImage('properties/pexels-rachel-claire-8112843 1.webp')}
-                    />
-                    <i
-                      className={`fa-heart like ${likedProperties.has(3) ? "fa-solid text-danger" : "fa-regular"}`}
-                      onClick={() => toggleLike(3)}
-                    ></i>
-                  </div>
-                  <h5 className='fw-normal mt-2 text-white'>Wish house</h5>
-                  <p className='gray-90'>@UA real estate agency</p>
-                  <div className='d-flex'>
-                    <div className='me-3'>
-                      <CountDown h={23} m={6} s={1} />
-                      <span className='gray-90'>Remaining Time</span>
-                    </div>
-                    <div>
-                      <h6 className='text-white'>16.62 ETH</h6>
-                      <span className='gray-90'>Current Bid</span>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card className='bg-black-100 rounded'>
-                <Card.Body className='p-2'>
-                  <div className='position-relative overflow-hidden rounded'>
-                    <Card.Img
-                      variant='top'
-                      alt='Spruce'
-                      src={getImage('properties/david-kovalenko-9-qFzV9a2Zc-unsplash.webp')}
-                    />
-                    <i
-                      className={`fa-heart like ${likedProperties.has(4) ? "fa-solid text-danger" : "fa-regular"}`}
-                      onClick={() => toggleLike(4)}
-                    ></i>
-                  </div>
-                  <h5 className='fw-normal mt-2 text-white'>Spruce</h5>
-                  <p className='gray-90'>@Dream House</p>
-                  <div className='d-flex'>
-                    <div className='me-3'>
-                      <CountDown h={10} m={30} s={58} />
-                      <span className='gray-90'>Remaining Time</span>
-                    </div>
-                    <div>
-                      <h6 className='text-white'>17.01 ETH</h6>
-                      <span className='gray-90'>Current Bid</span>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card className='bg-black-100 rounded'>
-                <Card.Body className='p-2'>
-                  <div className='position-relative overflow-hidden rounded'>
-                    <Card.Img
-                      variant='top'
-                      alt='Residence Rybna'
-                      src={getImage('properties/house_big-1.webp')}
-                    />
-                    <i
-                      className={`fa-heart like ${likedProperties.has(5) ? "fa-solid text-danger" : "fa-regular"}`}
-                      onClick={() => toggleLike(5)}
-                    ></i>
-                  </div>
-                  <h5 className='fw-normal mt-2 text-white'>Residence Rybna</h5>
-                  <p className='gray-90'>@UA real estate agency</p>
-                  <div className='d-flex'>
-                    <div className='me-3'>
-                      <CountDown h={18} m={21} s={8} />
-                      <span className='gray-90'>Remaining Time</span>
-                    </div>
-                    <div>
-                      <h6 className='text-white'>29.71 ETH</h6>
-                      <span className='gray-90'>Current Bid</span>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card className='bg-black-100 rounded'>
-                <Card.Body className='p-2'>
-                  <div className='position-relative overflow-hidden rounded'>
-                    <Card.Img
-                      variant='top'
-                      alt='Blue Sky'
-                      src={getImage('properties/house_big.webp')}
-                    />
-                    <i
-                      className={`fa-heart like ${likedProperties.has(6) ? "fa-solid text-danger" : "fa-regular"}`}
-                      onClick={() => toggleLike(6)}
-                    ></i>
-                  </div>
-                  <h5 className='fw-normal mt-2 text-white'>Blue Sky</h5>
-                  <p className='gray-90'>@ERA Ukraine Real Estate</p>
-                  <div className='d-flex'>
-                    <div className='me-3'>
-                      <CountDown h={23} m={16} s={11} />
-                      <span className='gray-90'>Remaining Time</span>
-                    </div>
-                    <div>
-                      <h6 className='text-white'>17.31 ETH</h6>
-                      <span className='gray-90'>Current Bid</span>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </SwiperSlide>
+            {visibleCards.map((c) => (
+              <SwiperSlide key={c.id}>
+                <PropertyAuctionCard
+                  id={c.id}
+                  imageSrc={c.imageSrc}
+                  title={c.title}
+                  agency={c.agency}
+                  countdown={c.countdown}
+                  currentBidEth={c.currentBidEth}
+                  liked={isLiked(c.id)}
+                  onToggleLike={toggleLike}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
-        </motion.div>
-        {/* End cards */}
+        </MotionIn>
       </Container>
     </div>
   );
