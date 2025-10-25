@@ -2,10 +2,7 @@ import { Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AnimationTitles } from "../components/functions/AnimationTitles";
 import type { FC } from "react";
-import illustration01 from "../images/illustration/01.webp";
-import illustration02 from "../images/illustration/02.webp";
-import illustration03 from "../images/illustration/03.webp";
-import illustration04 from "../images/illustration/04.webp";
+import { getImage } from "@/assets";
 
 export const Join: FC = () => {
   return (
@@ -34,7 +31,7 @@ export const Join: FC = () => {
           <SwiperSlide className='align-items-start flex-column px-3 py-4'>
             <h4 className='gray-100 mb-5'>1</h4>
             <img
-              src={illustration01}
+              src={getImage('illustration/01.webp')}
               alt='Crypto Community'
             />
             <AnimationTitles
@@ -49,7 +46,7 @@ export const Join: FC = () => {
           <SwiperSlide className='align-items-start flex-column px-3 py-4'>
             <h4 className='gray-100 mb-5'>2</h4>
             <img
-              src={illustration02}
+              src={getImage('illustration/02.webp')}
               alt='Asset Owners'
             />
             <AnimationTitles
@@ -63,7 +60,7 @@ export const Join: FC = () => {
           <SwiperSlide className='align-items-start flex-column px-3 py-4'>
             <h4 className='gray-100 mb-5'>3</h4>
             <img
-              src={illustration03}
+              src={getImage('illustration/03.webp')}
               alt='Registration'
             />
             <AnimationTitles
@@ -78,7 +75,7 @@ export const Join: FC = () => {
           <SwiperSlide className='align-items-start flex-column px-3 py-4'>
             <h4 className='gray-100 mb-5'>4</h4>
             <img
-              src={illustration04}
+              src={getImage('illustration/04.webp')}
               alt='Create Solutions'
             />
             <AnimationTitles

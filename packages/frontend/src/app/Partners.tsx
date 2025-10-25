@@ -3,12 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { motion } from "framer-motion";
 import type { FC } from "react";
-import stellarImg from "../images/partners/stellar.png";
-import blockportImg from "../images/partners/blockport.png";
-import fantomImg from "../images/partners/fantom.png";
-import onfidoImg from "../images/partners/onfido.png";
-import trImg from "../images/partners/tr.png";
-import qaImg from "../images/partners/qa.png";
+import { getImage } from "@/assets";
 
 export const Partners: FC = () => {
   return (
@@ -43,27 +38,27 @@ export const Partners: FC = () => {
         >
           <SwiperSlide>
             <img
-              src={stellarImg}
+              src={getImage('partners/stellar.png')}
               alt='stellar'
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
-              src={blockportImg}
+              src={getImage('partners/blockport.png')}
               alt='blockport'
             />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={fantomImg} alt='fantom' />
+            <img src={getImage('partners/fantom.png')} alt='fantom' />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={onfidoImg} alt='onfido' />
+            <img src={getImage('partners/onfido.png')} alt='onfido' />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={trImg} alt='tr' />
+            <img src={getImage('partners/tr.png')} alt='tr' />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={qaImg} alt='qa' />
+            <img src={getImage('partners/qa.png')} alt='qa' />
           </SwiperSlide>
         </Swiper>
       </Container>

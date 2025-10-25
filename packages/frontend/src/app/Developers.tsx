@@ -2,19 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { AnimationTitles } from "../components/functions/AnimationTitles";
 import { motion } from "framer-motion";
 import type { FC } from "react";
-import logo01 from "../images/developers/logo-01.png";
-import logo02 from "../images/developers/logo-02.png";
-import logo03 from "../images/developers/logo-03.png";
-import logo04 from "../images/developers/logo-04.png";
-import logo05 from "../images/developers/logo-05.png";
-import logo06 from "../images/developers/logo-06.png";
-import logo07 from "../images/developers/logo-07.png";
-import logo08 from "../images/developers/logo-08.png";
-import logo09 from "../images/developers/logo-09.png";
-import logo10 from "../images/developers/logo-10.png";
-import logo11 from "../images/developers/logo-11.png";
-import logo12 from "../images/developers/logo-12.png";
-import logo13 from "../images/developers/logo-13.png";
+import { getImage } from "@/assets";
 
 export const Developers: FC = () => {
   return (
@@ -56,7 +44,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo01}
+                  src={getImage('developers/logo-01.png')}
                   alt='UA real house'
                 />
                 <h6 className='m-0 text-white'>UA real house</h6>
@@ -66,7 +54,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo02}
+                  src={getImage('developers/logo-02.png')}
                   alt='ERA Ukraine Real Estate'
                 />
                 <h6 className='m-0 text-white'>ERA Ukraine Real Estate</h6>
@@ -76,7 +64,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo03}
+                  src={getImage('developers/logo-03.png')}
                   alt='Happy Neighbor'
                 />
                 <h6 className='m-0 text-white'>Happy Neighbor</h6>
@@ -86,7 +74,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo04}
+                  src={getImage('developers/logo-04.png')}
                   alt='American Home Agents'
                 />
                 <h6 className='m-0 text-white'>American Home Agents</h6>
@@ -96,7 +84,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo05}
+                  src={getImage('developers/logo-05.png')}
                   alt='Ukr Home Agents'
                 />
                 <h6 className='m-0 text-white'>Ukr Home Agents</h6>
@@ -106,7 +94,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo06}
+                  src={getImage('developers/logo-06.png')}
                   alt='UA real estate agency'
                 />
                 <h6 className='m-0 text-white'>UA real estate agency</h6>
@@ -140,7 +128,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo07}
+                  src={getImage('developers/logo-07.png')}
                   alt='Red Oak Realty'
                 />
                 <h6 className='m-0 text-white'>Red Oak Realty</h6>
@@ -150,7 +138,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo08}
+                  src={getImage('developers/logo-08.png')}
                   alt='Dream House'
                 />
                 <h6 className='m-0 text-white'>Dream House</h6>
@@ -160,7 +148,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo09}
+                  src={getImage('developers/logo-09.png')}
                   alt='Leading Real Estate Companies'
                 />
                 <h6 className='m-0 text-white'>
@@ -172,7 +160,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo10}
+                  src={getImage('developers/logo-10.png')}
                   alt='Home Partners of World'
                 />
                 <h6 className='m-0 text-white'>Home Partners of World</h6>
@@ -182,7 +170,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo11}
+                  src={getImage('developers/logo-11.png')}
                   alt='Red Oak Realty'
                 />
                 <h6 className='m-0 text-white'>Red Oak Realty</h6>
@@ -192,7 +180,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo13}
+                  src={getImage('developers/logo-13.png')}
                   alt='American Home Agents'
                 />
                 <h6 className='m-0 text-white'>American Home Agents</h6>
@@ -202,7 +190,7 @@ export const Developers: FC = () => {
               <div className='d-flex justify-content-between align-items-center px-3 py-2'>
                 <img
                   className='pe-3'
-                  src={logo12}
+                  src={getImage('developers/logo-12.png')}
                   alt='UA real estate agency'
                 />
                 <h6 className='m-0 text-white'>UA real estate agency</h6>

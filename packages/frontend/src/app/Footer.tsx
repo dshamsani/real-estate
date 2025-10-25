@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import type { FC } from "react";
-import logoImg from "../images/logo/logo.png";
+import { getImage } from "@/assets";
 
 export const Footer: FC = () => {
   return (
@@ -14,7 +14,7 @@ export const Footer: FC = () => {
             transition={{ duration: 0.8 }}
           >
             <img
-              src={logoImg}
+              src={getImage('logo/logo.png')}
               alt='logo'
               className='mb-3'
             />

@@ -5,8 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { CountDown } from "../components/functions/CountDown";
 import { motion } from "framer-motion";
 import { AnimationTitles } from "../components/functions/AnimationTitles";
-import houseBig1 from "../images/properties/house_big-1.webp";
-import houseBig from "../images/properties/house_big.webp";
+import { getImage } from "@/assets";
 
 export const Header: FC = () => {
   // Like button handler
@@ -64,7 +63,7 @@ export const Header: FC = () => {
                   <Card.Img
                     variant='top'
                     alt='img'
-                    src={houseBig1}
+                    src={getImage('properties/house_big-1.webp')}
                   />
                   <i
                     className='fa-regular fa-heart like'
@@ -91,7 +90,7 @@ export const Header: FC = () => {
                   <Card.Img
                     variant='top'
                     alt='img'
-                    src={houseBig}
+                    src={getImage('properties/house_big.webp')}
                   />
                   <i
                     className='fa-regular fa-heart like'

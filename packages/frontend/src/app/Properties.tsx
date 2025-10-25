@@ -8,12 +8,8 @@ import { CountDown } from "../components/functions/CountDown";
 import { motion } from "framer-motion";
 import { AnimationTitles } from "../components/functions/AnimationTitles";
 import type { FC, MouseEvent } from "react";
-import woodenBuildingImg from "../images/properties/picture-of-a-wooden-building-in-the-forest.webp";
-import freshnessImg from "../images/properties/pexels-stan-krotov-12737424 1.webp";
-import wishHouseImg from "../images/properties/pexels-rachel-claire-8112843 1.webp";
-import spruceImg from "../images/properties/david-kovalenko-9-qFzV9a2Zc-unsplash.webp";
-import residenceRybnaImg from "../images/properties/house_big-1.webp";
-import blueSkyImg from "../images/properties/house_big.webp";
+
+import { getImage } from "@/assets";
 
 export const Properties: FC = () => {
   // Active on select a tab
@@ -160,7 +156,7 @@ export const Properties: FC = () => {
                     <Card.Img
                       variant='top'
                       alt='Cottage Forrest 1'
-                      src={woodenBuildingImg}
+                      src={getImage('properties/picture-of-a-wooden-building-in-the-forest.webp')}
                     />
                     <i
                       className='fa-regular fa-heart like'
@@ -191,7 +187,7 @@ export const Properties: FC = () => {
                     <Card.Img
                       variant='top'
                       alt='Freshness'
-                      src={freshnessImg}
+                      src={getImage('properties/pexels-stan-krotov-12737424 1.webp')}
                     />
                     <i
                       className='fa-solid fa-heart like text-danger'
@@ -220,7 +216,7 @@ export const Properties: FC = () => {
                     <Card.Img
                       variant='top'
                       alt='Wish house'
-                      src={wishHouseImg}
+                      src={getImage('properties/pexels-rachel-claire-8112843 1.webp')}
                     />
                     <i
                       className='fa-regular fa-heart like'
@@ -249,7 +245,7 @@ export const Properties: FC = () => {
                     <Card.Img
                       variant='top'
                       alt='Spruce'
-                      src={spruceImg}
+                      src={getImage('properties/david-kovalenko-9-qFzV9a2Zc-unsplash.webp')}
                     />
                     <i
                       className='fa-regular fa-heart like'
@@ -278,7 +274,7 @@ export const Properties: FC = () => {
                     <Card.Img
                       variant='top'
                       alt='Residence Rybna'
-                      src={residenceRybnaImg}
+                      src={getImage('properties/house_big-1.webp')}
                     />
                     <i
                       className='fa-regular fa-heart like'
@@ -307,7 +303,7 @@ export const Properties: FC = () => {
                     <Card.Img
                       variant='top'
                       alt='Blue Sky'
-                      src={blueSkyImg}
+                      src={getImage('properties/house_big.webp')}
                     />
                     <i
                       className='fa-regular fa-heart like'

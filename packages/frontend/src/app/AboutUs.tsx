@@ -3,10 +3,7 @@ import type { FC } from "react";
 import { Button, Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { AnimationTitles } from "../components/functions/AnimationTitles";
-import bohdanImg from "../images/bohdan-d-fh6o-XkVQG8-unsplash.webp";
-import johnImg from "../images/john-o-nolan-6f_ANCcbj3o-unsplash.webp";
-import juliaImg from "../images/julia-solonina-ci19YINguoc-unsplash.webp";
-import theaterImg from "../images/theater-amazonas-manaus.webp";
+import { getImage } from "@/assets";
 
 export const AboutUs: FC = () => {
   return (
@@ -39,14 +36,14 @@ export const AboutUs: FC = () => {
           <div className='d-flex'>
             <div>
               <img
-                src={bohdanImg}
+                src={getImage('bohdan-d-fh6o-XkVQG8-unsplash.webp')}
                 className='img me-2 p-0'
                 alt='img'
               />
             </div>
             <div>
               <img
-                src={johnImg}
+                src={getImage('john-o-nolan-6f_ANCcbj3o-unsplash.webp')}
                 className='img p-0'
                 alt='img'
               />
@@ -55,14 +52,14 @@ export const AboutUs: FC = () => {
           <div className='d-flex'>
             <div>
               <img
-                src={juliaImg}
+                src={getImage('julia-solonina-ci19YINguoc-unsplash.webp')}
                 className='img me-2 p-0'
                 alt='img'
               />
             </div>
             <div>
               <img
-                src={theaterImg}
+                src={getImage('theater-amazonas-manaus.webp')}
                 className='img p-0'
                 alt='img'
               />
