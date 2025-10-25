@@ -4,9 +4,10 @@ import { type FC, useMemo } from "react";
 interface AnimationTitlesProps {
   title: string;
   className?: string;
+  trigger?: "viewport" | "mount";
 }
 
-export const AnimationTitles: FC<AnimationTitlesProps> = ({ title, className }) => {
+export const AnimationTitles: FC<AnimationTitlesProps> = ({ title, className, trigger = "viewport" }) => {
   const characters = useMemo(() => title.split(""), [title]);
 
   const hVariants = {
@@ -30,10 +31,15 @@ export const AnimationTitles: FC<AnimationTitlesProps> = ({ title, className }) 
     },
   };
 
+  const headingMotionProps =
+    trigger === "viewport"
+      ? { whileInView: "visible", viewport: { once: true, amount: 0.2 } }
+      : { animate: "visible" };
+
   return (
-    <motion.h1 variants={hVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className={className}>
+    <motion.h1 variants={hVariants} initial="hidden" {...headingMotionProps} className={className}>
       {characters.map((char, index) => (
-        <motion.span viewport={{ once: true, amount: 0.2 }} variants={spanVariants} key={`${char}_${index}`}>
+        <motion.span variants={spanVariants} key={`${char}_${index}`}>
           {char}
         </motion.span>
       ))}

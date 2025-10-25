@@ -5,10 +5,11 @@ type MotionInProps = PropsWithChildren<{
   from?: "left" | "right" | "top" | "bottom" | "fade";
   duration?: number;
   className?: string;
+  trigger?: "viewport" | "mount";
 }> &
   Omit<MotionProps, "initial" | "animate" | "transition">;
 
-export const MotionIn: FC<MotionInProps> = ({ from = "fade", duration = 0.8, className, children, ...rest }) => {
+export const MotionIn: FC<MotionInProps> = ({ from = "fade", duration = 0.8, className, trigger = "viewport", children, ...rest }) => {
   const delta = 400;
 
   const map = {
@@ -19,8 +20,10 @@ export const MotionIn: FC<MotionInProps> = ({ from = "fade", duration = 0.8, cla
     fade: { initial: { opacity: 0 }, animate: { opacity: 1 } },
   }[from];
 
+  const viewportProps = trigger === "viewport" ? { viewport: { once: true, amount: 0.2 } } : {};
+
   return (
-    <motion.div {...map} viewport={{ once: true, amount: 0.2 }} transition={{ duration, ease: "easeOut" }} className={className} {...rest}>
+    <motion.div {...map} {...viewportProps} transition={{ duration, ease: "easeOut" }} className={className} {...rest}>
       {children}
     </motion.div>
   );

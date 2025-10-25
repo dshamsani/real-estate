@@ -12,8 +12,8 @@ export const Header: FC = () => {
   return (
     <div className="loading position-relative">
       <Container className="d-flex justify-content-between align-items-center gap-md-5 flex-column flex-md-row mt-xl-4 mt-3 overflow-hidden">
-        <MotionIn from="left">
-          <AnimationTitles title="Future of real estate investing" />
+        <MotionIn from="left" trigger="mount">
+          <AnimationTitles title="Future of real estate investing" trigger="mount" />
           <p className="gray-90 fs-5 mt-3">Our real estate is virtual property you can purchase on a metaverse platform</p>
           <Button className="fs-5 fw-bold m-0 my-3 px-5 py-2">Explore</Button>
 
@@ -22,7 +22,7 @@ export const Header: FC = () => {
           </div>
         </MotionIn>
 
-        <MotionIn from="right" className="my-5 w-100">
+        <MotionIn from="right" className="my-5 w-100" trigger="mount">
           <div className="cards">
             {HEADER_CARDS.map((c) => (
               <PropertyAuctionCard
@@ -40,7 +40,7 @@ export const Header: FC = () => {
           </div>
         </MotionIn>
 
-        <MotionIn from="fade" className="d-md-none d-flex features my-4">
+        <MotionIn from="fade" className="d-md-none d-flex features my-4" trigger="mount">
           <FeaturesRow items={STATS} className="d-flex w-100 justify-content-between align-items-center" />
         </MotionIn>
       </Container>
