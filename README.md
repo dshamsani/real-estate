@@ -1,41 +1,38 @@
-# Real Estate Rental Platform (crypto payment system)
+# Real Estate Rental Platform
 
-Rental Platform aims to revolutionize the rental property market by integrating cryptocurrency payments into a secure, scalable platform that simplifies transactions for property owners and tenants.
+## Installation
 
-![alt text](public/banner.png)
+```bash
+pnpm install
+```
 
----
+## Development
 
-## Features
-- **Blockchain-Powered Rentals** – Smart contracts for transparent rental agreements.  
-- **Wallet Integration** – Connect via MetaMask.  
-- **Decentralized Storage** – Property data stored on IPFS.  
-- **Secure Payments** – Crypto-based rent payments with transaction history.  
-- **Tenant & Landlord Dashboard** – Manage listings, agreements, and rental status.  
-- **NFT Property Proofs** – Each property represented as a unique NFT.  
+Run both frontend and backend:
+```bash
+pnpm start
+```
 
----
+Run frontend only:
+```bash
+pnpm dev
+```
+
+## Build
+
+```bash
+pnpm build
+```
+
+## Preview Production Build
+
+```bash
+pnpm preview
+```
 
 ## Tech Stack
-- **Frontend:** React.js / Next.js  
-- **Backend:** Node.js / Express.js  
-- **Database:** MongoDB  
-- **Smart Contracts:** Solidity (Ethereum)  
-- **Web3 Integration:** ethers.js  
-- **Decentralized Storage:** IPFS  
 
----
-
-#### Web3 is not a temporary trend - it is the future of the Internet!
-
-#### Are you ready to enter the Web3 Era? Let's explore a decentralized world today!
-
-
-### Installation
-
-```
-   git clone [repo-url]
-   cd real-estate
-   npm install
-   npm start
-```
+- **Frontend:** React 18 + TypeScript + Vite
+- **Backend:** Node.js + Express
+- **Database:** MongoDB
+- **Package Manager:** pnpm
