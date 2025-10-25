@@ -1,34 +1,34 @@
 import { Button, Card, Container } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import { CountDown } from "../components/functions/CountDown";
 import { motion } from "framer-motion";
 import { AnimationTitles } from "../components/functions/AnimationTitles";
-import type { FC, MouseEvent } from "react";
+import type { FC } from "react";
+import { useState } from "react";
 
 import { getImage } from "@/assets";
 
+type PropertyTab = "All" | "Cottage" | "Chalet" | "Manor" | "Penthouse" | "Farmhouse" | "Duplex";
+
 export const Properties: FC = () => {
-  // Active on select a tab
-  const handleActive = (e: MouseEvent<HTMLButtonElement>) => {
-    const activeElements = document.querySelectorAll(".active");
-    if (activeElements[0]) {
-      activeElements[0].classList.remove("active");
-    }
-    e.currentTarget.classList.add("active");
+  const [activeTab, setActiveTab] = useState<PropertyTab>("Cottage");
+  const [likedProperties, setLikedProperties] = useState<Set<number>>(new Set([2]));
+
+  const handleTabClick = (tab: PropertyTab) => {
+    setActiveTab(tab);
   };
 
-  // Like button handler
-  const handleLike = (e: MouseEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    if (target.classList.contains("fa-regular")) {
-      target.className = "fa-solid fa-heart like text-danger";
-    } else {
-      target.className = "fa-regular fa-heart like";
-    }
+  const toggleLike = (propertyId: number) => {
+    setLikedProperties((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(propertyId)) {
+        newSet.delete(propertyId);
+      } else {
+        newSet.add(propertyId);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -56,56 +56,56 @@ export const Properties: FC = () => {
           >
             <SwiperSlide>
               <Button
-                className='bg-black-100 ms-0 border-0'
-                onClick={handleActive}
+                className={`bg-black-100 ms-0 border-0 ${activeTab === "All" ? "active" : ""}`}
+                onClick={() => handleTabClick("All")}
               >
                 All
               </Button>
             </SwiperSlide>
             <SwiperSlide>
               <Button
-                className='bg-black-100 active ms-0 border-0'
-                onClick={handleActive}
+                className={`bg-black-100 ms-0 border-0 ${activeTab === "Cottage" ? "active" : ""}`}
+                onClick={() => handleTabClick("Cottage")}
               >
                 Cottage
               </Button>
             </SwiperSlide>
             <SwiperSlide>
               <Button
-                className='bg-black-100 ms-0 border-0'
-                onClick={handleActive}
+                className={`bg-black-100 ms-0 border-0 ${activeTab === "Chalet" ? "active" : ""}`}
+                onClick={() => handleTabClick("Chalet")}
               >
                 Chalet
               </Button>
             </SwiperSlide>
             <SwiperSlide>
               <Button
-                className='bg-black-100 ms-0 border-0'
-                onClick={handleActive}
+                className={`bg-black-100 ms-0 border-0 ${activeTab === "Manor" ? "active" : ""}`}
+                onClick={() => handleTabClick("Manor")}
               >
                 Manor
               </Button>
             </SwiperSlide>
             <SwiperSlide>
               <Button
-                className='bg-black-100 ms-0 border-0'
-                onClick={handleActive}
+                className={`bg-black-100 ms-0 border-0 ${activeTab === "Penthouse" ? "active" : ""}`}
+                onClick={() => handleTabClick("Penthouse")}
               >
                 Penthouse
               </Button>
             </SwiperSlide>
             <SwiperSlide>
               <Button
-                className='bg-black-100 ms-0 border-0'
-                onClick={handleActive}
+                className={`bg-black-100 ms-0 border-0 ${activeTab === "Farmhouse" ? "active" : ""}`}
+                onClick={() => handleTabClick("Farmhouse")}
               >
                 Farmhouse
               </Button>
             </SwiperSlide>
             <SwiperSlide>
               <Button
-                className='bg-black-100 ms-0 border-0'
-                onClick={handleActive}
+                className={`bg-black-100 ms-0 border-0 ${activeTab === "Duplex" ? "active" : ""}`}
+                onClick={() => handleTabClick("Duplex")}
               >
                 Duplex
               </Button>
@@ -159,8 +159,8 @@ export const Properties: FC = () => {
                       src={getImage('properties/picture-of-a-wooden-building-in-the-forest.webp')}
                     />
                     <i
-                      className='fa-regular fa-heart like'
-                      onClick={handleLike}
+                      className={`fa-heart like ${likedProperties.has(1) ? "fa-solid text-danger" : "fa-regular"}`}
+                      onClick={() => toggleLike(1)}
                     ></i>
                   </div>
                   <h5 className='fw-normal mt-2 text-white'>
@@ -190,8 +190,8 @@ export const Properties: FC = () => {
                       src={getImage('properties/pexels-stan-krotov-12737424 1.webp')}
                     />
                     <i
-                      className='fa-solid fa-heart like text-danger'
-                      onClick={handleLike}
+                      className={`fa-heart like ${likedProperties.has(2) ? "fa-solid text-danger" : "fa-regular"}`}
+                      onClick={() => toggleLike(2)}
                     ></i>
                   </div>
                   <h5 className='fw-normal mt-2 text-white'>Freshness</h5>
@@ -219,8 +219,8 @@ export const Properties: FC = () => {
                       src={getImage('properties/pexels-rachel-claire-8112843 1.webp')}
                     />
                     <i
-                      className='fa-regular fa-heart like'
-                      onClick={handleLike}
+                      className={`fa-heart like ${likedProperties.has(3) ? "fa-solid text-danger" : "fa-regular"}`}
+                      onClick={() => toggleLike(3)}
                     ></i>
                   </div>
                   <h5 className='fw-normal mt-2 text-white'>Wish house</h5>
@@ -248,8 +248,8 @@ export const Properties: FC = () => {
                       src={getImage('properties/david-kovalenko-9-qFzV9a2Zc-unsplash.webp')}
                     />
                     <i
-                      className='fa-regular fa-heart like'
-                      onClick={handleLike}
+                      className={`fa-heart like ${likedProperties.has(4) ? "fa-solid text-danger" : "fa-regular"}`}
+                      onClick={() => toggleLike(4)}
                     ></i>
                   </div>
                   <h5 className='fw-normal mt-2 text-white'>Spruce</h5>
@@ -277,8 +277,8 @@ export const Properties: FC = () => {
                       src={getImage('properties/house_big-1.webp')}
                     />
                     <i
-                      className='fa-regular fa-heart like'
-                      onClick={handleLike}
+                      className={`fa-heart like ${likedProperties.has(5) ? "fa-solid text-danger" : "fa-regular"}`}
+                      onClick={() => toggleLike(5)}
                     ></i>
                   </div>
                   <h5 className='fw-normal mt-2 text-white'>Residence Rybna</h5>
@@ -306,8 +306,8 @@ export const Properties: FC = () => {
                       src={getImage('properties/house_big.webp')}
                     />
                     <i
-                      className='fa-regular fa-heart like'
-                      onClick={handleLike}
+                      className={`fa-heart like ${likedProperties.has(6) ? "fa-solid text-danger" : "fa-regular"}`}
+                      onClick={() => toggleLike(6)}
                     ></i>
                   </div>
                   <h5 className='fw-normal mt-2 text-white'>Blue Sky</h5>

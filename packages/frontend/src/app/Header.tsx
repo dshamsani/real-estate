@@ -1,21 +1,25 @@
-import type { FC, MouseEvent } from "react";
+import type { FC } from "react";
+import { useState } from "react";
 
 import { Button, Card, Container } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { CountDown } from "../components/functions/CountDown";
 import { motion } from "framer-motion";
 import { AnimationTitles } from "../components/functions/AnimationTitles";
 import { getImage } from "@/assets";
 
 export const Header: FC = () => {
-  // Like button handler
-  const handleLike = (e: MouseEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    if (target.classList.contains("fa-regular")) {
-      target.className = "fa-solid fa-heart like text-danger";
-    } else {
-      target.className = "fa-regular fa-heart like";
-    }
+  const [likedProperties, setLikedProperties] = useState<Set<number>>(new Set());
+
+  const toggleLike = (propertyId: number) => {
+    setLikedProperties((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(propertyId)) {
+        newSet.delete(propertyId);
+      } else {
+        newSet.add(propertyId);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -66,8 +70,8 @@ export const Header: FC = () => {
                     src={getImage('properties/house_big-1.webp')}
                   />
                   <i
-                    className='fa-regular fa-heart like'
-                    onClick={handleLike}
+                    className={`fa-heart like ${likedProperties.has(1) ? "fa-solid text-danger" : "fa-regular"}`}
+                    onClick={() => toggleLike(1)}
                   ></i>
                 </div>
                 <h5 className='fw-normal mt-2 text-white'>Residence Rybna</h5>
@@ -93,8 +97,8 @@ export const Header: FC = () => {
                     src={getImage('properties/house_big.webp')}
                   />
                   <i
-                    className='fa-regular fa-heart like'
-                    onClick={handleLike}
+                    className={`fa-heart like ${likedProperties.has(2) ? "fa-solid text-danger" : "fa-regular"}`}
+                    onClick={() => toggleLike(2)}
                   ></i>
                 </div>
                 <h5 className='fw-normal mt-2 text-white'>Blue Sky</h5>
